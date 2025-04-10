@@ -32,4 +32,14 @@ public class LineTest {
 
         assertEquals(3, run);
     }
+
+
+    @Test
+    void riseIsTheDifferenceBetweenYCoodrinates() {
+        Line line = new Line(a, b);
+
+        double rise = line.rise();
+
+        assertEquals(4, rise);
+    }
 }
