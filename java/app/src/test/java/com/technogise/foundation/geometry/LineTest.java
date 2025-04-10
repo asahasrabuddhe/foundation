@@ -25,7 +25,7 @@ public class LineTest {
     }
 
     @Test
-    void runIsTheDifferenceBetweenXCoordinateS() {
+    void runIsTheDifferenceBetweenXCoordinates() {
         Line line = new Line(a, b);
 
         double run = line.run();
