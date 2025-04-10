@@ -60,7 +60,9 @@ public class LineTest {
     void parallelLinesHaveTheSameSlope() {
         Point x = new Point(1, 1);
         Point y =  new Point(4, 5);
+
         Line otherLine = new Line(x, y);
+
         double slope1 = line.slope();
         double slope2 = otherLine.slope();
 
