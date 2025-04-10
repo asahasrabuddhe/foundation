@@ -19,4 +19,8 @@ public record Line(Point a, Point b) {
     public double slope() {
         return rise() / run();
     }
+
+    public boolean isParallelTo(Line other) {
+        return this.slope() == other.slope();
+    }
 }
