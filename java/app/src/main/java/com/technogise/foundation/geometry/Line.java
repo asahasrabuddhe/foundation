@@ -15,4 +15,8 @@ public record Line(Point a, Point b) {
 
         return Math.sqrt(dx*dx + dy*dy);
     }
+
+    public double slope() {
+        return rise() / run();
+    }
 }

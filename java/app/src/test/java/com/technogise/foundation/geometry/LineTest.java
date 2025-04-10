@@ -49,4 +49,10 @@ public class LineTest {
         assertEquals(5, length);
     }
 
+    @Test
+    void slopeIsTheRatioOfRiseToRun() {
+        double slope = line.rise() / line.run();
+
+        assertEquals(4.0 / 3.0, slope);
+    }
 }
