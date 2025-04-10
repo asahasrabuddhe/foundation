@@ -42,4 +42,11 @@ public class LineTest {
         assertEquals(4, rise);
     }
 
+    @Test 
+    void lengthIsTheEuclideanDistanceBetweenTwoPoints() {
+        double length = line.length();
+
+        assertEquals(5, length);
+    }
+
 }
