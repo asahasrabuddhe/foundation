@@ -68,4 +68,18 @@ public class LineTest {
 
         assertEquals(slope1, slope2);
     }
+
+
+    @Test
+    void perpendicularLinesHaveNegativeReciprocalSlopes() {
+        Point x = new Point(0, 0);
+        Point y = new Point(-4, 3);
+
+        Line otherLine = new Line(x, y);
+        
+        double slope1 = line.slope();
+        double slope2 = otherLine.slope();
+
+        assertEquals(-1, slope1 * slope2);
+    }
 }
