@@ -11,23 +11,24 @@ import org.junit.jupiter.api.Test;
 public class LineTest {
     Point a;
     Point b;
+    Line line;
 
     @BeforeEach
     void setup() {
         a = new Point(0, 0);
         b = new Point(3, 4);
+        line = new Line(a, b);
     }
 
     @AfterEach
     void cleanup() {
         a = null;
         b = null;
+        line = null;
     }
 
     @Test
     void runIsTheDifferenceBetweenXCoordinates() {
-        Line line = new Line(a, b);
-
         double run = line.run();
 
         assertEquals(3, run);
@@ -36,10 +37,9 @@ public class LineTest {
 
     @Test
     void riseIsTheDifferenceBetweenYCoodrinates() {
-        Line line = new Line(a, b);
-
         double rise = line.rise();
 
         assertEquals(4, rise);
     }
+
 }
