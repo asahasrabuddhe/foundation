@@ -23,4 +23,8 @@ public record Line(Point a, Point b) {
     public boolean isParallelTo(Line other) {
         return this.slope() == other.slope();
     }
+
+    public boolean isPerpendicularTo(Line other) {
+        return this.slope() * other.slope() == -1;
+    }
 }
