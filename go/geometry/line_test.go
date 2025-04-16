@@ -59,3 +59,19 @@ func TestLine_CalculateSlope(t *testing.T) {
 		t.Errorf("Expected slope to be %f, got %f", expectedSlope, l.Slope())
 	}
 }
+
+func TestLine_IsParallel(t *testing.T) {
+	// Test that parallel lines have the same slope
+
+	p1 := Point{X: 1.0, Y: 2.0}
+	p2 := Point{X: 3.0, Y: 5.0}
+	l1 := Line{Start: p1, End: p2}
+
+	p3 := Point{X: 2.0, Y: 3.0}
+	p4 := Point{X: 4.0, Y: 6.0}
+	l2 := Line{Start: p3, End: p4}
+
+	if !l1.IsParallelTo(l2) {
+		t.Error("Expected lines to be parallel as they have the same slope")
+	}
+}

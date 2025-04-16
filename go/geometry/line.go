@@ -22,3 +22,7 @@ func (l Line) Length() float64 {
 func (l Line) Slope() float64 {
 	return l.Rise() / l.Run()
 }
+
+func (l Line) IsParallelTo(other Line) bool {
+	return l.Slope() == other.Slope()
+}
