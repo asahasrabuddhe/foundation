@@ -1,4 +1,4 @@
-use super::point::Point;
+use crate::geometry::point::Point;
 
 pub struct Line {
     pub start: Point,
