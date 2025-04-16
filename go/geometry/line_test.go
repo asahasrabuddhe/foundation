@@ -6,6 +6,7 @@ import (
 
 func TestLine_CalculateRise(t *testing.T) {
 	// Test that the rise (difference in y-coordinates) is calculated correctly
+
 	p1 := Point{X: 1.0, Y: 2.0}
 	p2 := Point{X: 3.0, Y: 5.0}
 
@@ -42,5 +43,19 @@ func TestLine_CalculateLength(t *testing.T) {
 
 	if l.Length() != expectedLength {
 		t.Errorf("Expected length to be %f, got %f", expectedLength, l.Length())
+	}
+}
+
+func TestLine_CalculateSlope(t *testing.T) {
+	// Test that the slope (rise/run) is calculated correctly
+
+	p1 := Point{X: 1.0, Y: 2.0}
+	p2 := Point{X: 3.0, Y: 5.0}
+
+	l := Line{Start: p1, End: p2}
+	expectedSlope := 1.5 // 3.0 / 2.0
+
+	if l.Slope() != expectedSlope {
+		t.Errorf("Expected slope to be %f, got %f", expectedSlope, l.Slope())
 	}
 }
