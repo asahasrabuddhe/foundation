@@ -13,4 +13,8 @@ impl Line {
     pub fn run(&self) -> f64 {
         self.end.x - self.start.x
     }
+
+    pub fn length(&self) -> f64 {
+        (self.rise().powi(2) + self.run().powi(2)).sqrt()
+    }
 }
