@@ -26,3 +26,7 @@ func (l Line) Slope() float64 {
 func (l Line) IsParallelTo(other Line) bool {
 	return l.Slope() == other.Slope()
 }
+
+func (l Line) IsPerpendicularTo(other Line) bool {
+	return l.Slope()*other.Slope() == -1
+}
