@@ -29,4 +29,19 @@ impl Line {
     pub fn is_parallel_to(&self, other: &Line) -> bool {
         self.slope() == other.slope()
     }
+
+    pub fn is_perpendicular_to(&self, other: &Line) -> bool {
+        let slope1 = self.slope();
+        let slope2 = other.slope();
+
+        // Handle special cases for vertical and horizontal lines
+        if slope1.is_infinite() && slope2 == 0.0 {
+            return true;
+        }
+        if slope2.is_infinite() && slope1 == 0.0 {
+            return true;
+        }
+
+        slope1 * slope2 == -1.0
+    }
 }
