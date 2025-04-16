@@ -17,4 +17,12 @@ impl Line {
     pub fn length(&self) -> f64 {
         (self.rise().powi(2) + self.run().powi(2)).sqrt()
     }
+
+    pub fn slope(&self) -> f64 {
+        if self.run() == 0.0 {
+            f64::INFINITY
+        } else {
+            self.rise() / self.run()
+        }
+    }
 }
