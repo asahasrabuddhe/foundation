@@ -22,4 +22,8 @@ export class Line {
     isParallelTo(other: Line): boolean {
         return this.slope === other.slope;
     }
+
+    isPerpendicularTo(other: Line): boolean {
+        return this.slope * other.slope === -1;
+    }
 }

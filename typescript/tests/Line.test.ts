@@ -49,3 +49,15 @@ test('Parallel lines have the same slope', () => {
 
     expect(line1.isParallelTo(line2)).toBe(true);
 });
+
+test('Perpendicular lines have slopes which are negative reciprocals', () => {
+    const a1 = new Point(0, 0);
+    const b1 = new Point(3, 4);
+    const line1 = new Line(a1, b1);
+
+    const a2 = new Point(0, 0);
+    const b2 = new Point(-4, 3);
+    const line2 = new Line(a2, b2);
+
+    expect(line1.isPerpendicularTo(line2)).toBe(true);
+});
