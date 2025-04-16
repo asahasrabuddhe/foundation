@@ -1,13 +1,17 @@
+mod geometry;
+
 use geometry::line::Line;
 use geometry::point::Point;
 
 fn main() {
-    let a = Point { x: 1.0, y: 1.0 };
-    let b = Point { x: 3.0, y: 4.0 };
+    // Create points
+    let point1 = Point { x: 0.0, y: 0.0 };
+    let point2 = Point { x: 3.0, y: 4.0 };
     
+    // Create a line
     let line = Line {
-        start: a,
-        end: b,
+        start: point1,
+        end: point2,
     };
 
     println!("Length of the line is: {}", line.length());
