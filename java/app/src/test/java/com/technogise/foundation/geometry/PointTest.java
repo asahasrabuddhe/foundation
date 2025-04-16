@@ -2,8 +2,6 @@ package com.technogise.foundation.geometry;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.technogise.foundation.geometry.Point;
-
 import org.junit.jupiter.api.Test;
 
 class PointTest {
