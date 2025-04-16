@@ -35,5 +35,17 @@ test('Slope of the line is calculated correctly', () => {
 
     const line = new Line(a, b);
     
-    expect(line.slope()).toBe(4 / 3);
+    expect(line.slope).toBe(4 / 3);
+});
+
+test('Parallel lines have the same slope', () => {
+    const a1 = new Point(0, 0);
+    const b1 = new Point(3, 4);
+    const line1 = new Line(a1, b1);
+
+    const a2 = new Point(0, 1);
+    const b2 = new Point(3, 5);
+    const line2 = new Line(a2, b2);
+
+    expect(line1.isParallelTo(line2)).toBe(true);
 });
