@@ -17,3 +17,12 @@ fn test_line_calculate_run() {
     
     assert_eq!(line.run(), 2.0);
 }
+
+#[test]
+fn test_line_calculate_length() {
+    let start = Point { x: 0.0, y: 0.0 };
+    let end = Point { x: 3.0, y: 4.0 };
+    let line = Line { start, end };
+    
+    assert_eq!(line.length(), 5.0);
+}
