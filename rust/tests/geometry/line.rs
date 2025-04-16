@@ -26,3 +26,12 @@ fn test_line_calculate_length() {
     
     assert_eq!(line.length(), 5.0);
 }
+
+#[test]
+fn test_line_calculate_slope() {
+    let start = Point { x: 1.0, y: 2.0 };
+    let end = Point { x: 3.0, y: 5.0 };
+    let line = Line { start, end };
+    
+    assert_eq!(line.slope(), 1.5);
+}
