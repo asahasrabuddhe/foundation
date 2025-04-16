@@ -10,4 +10,8 @@ export class Line {
     get run(): number {
         return this.b.x - this.a.x;
     }
+
+    get length(): number {
+        return Math.sqrt(this.rise ** 2 + this.run ** 2);
+    }
 }
