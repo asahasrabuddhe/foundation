@@ -9,4 +9,8 @@ impl Line {
     pub fn rise(&self) -> f64 {
         self.end.y - self.start.y
     }
+
+    pub fn run(&self) -> f64 {
+        self.end.x - self.start.x
+    }
 }
