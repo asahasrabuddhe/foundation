@@ -14,4 +14,8 @@ export class Line {
     get length(): number {
         return Math.sqrt(this.rise ** 2 + this.run ** 2);
     }
+
+    get slope(): number {
+        return this.rise / this.run;
+    }
 }
