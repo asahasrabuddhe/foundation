@@ -16,3 +16,17 @@ func TestLine_CalculateRise(t *testing.T) {
 		t.Errorf("Expected rise to be %f, got %f", expectedRise, l.Rise())
 	}
 }
+
+func TestLine_CalculateRun(t *testing.T) {
+	// Test that the run (difference in x-coordinates) is calculated correctly
+
+	p1 := Point{X: 1.0, Y: 2.0}
+	p2 := Point{X: 3.0, Y: 5.0}
+
+	l := Line{Start: p1, End: p2}
+	expectedRun := 2.0 // 3.0 - 1.0
+
+	if l.Run() != expectedRun {
+		t.Errorf("Expected run to be %f, got %f", expectedRun, l.Run())
+	}
+}
