@@ -18,4 +18,8 @@ export class Line {
     get slope(): number {
         return this.rise / this.run;
     }
+
+    isParallelTo(other: Line): boolean {
+        return this.slope === other.slope;
+    }
 }
