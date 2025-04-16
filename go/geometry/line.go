@@ -8,3 +8,7 @@ type Line struct {
 func (l Line) Rise() float64 {
 	return l.End.Y - l.Start.Y
 }
+
+func (l Line) Run() float64 {
+	return l.End.X - l.Start.X
+}
