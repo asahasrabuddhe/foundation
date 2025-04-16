@@ -6,4 +6,8 @@ export class Line {
     get rise(): number {
         return this.b.y - this.a.y;
     }
+
+    get run(): number {
+        return this.b.x - this.a.x;
+    }
 }
