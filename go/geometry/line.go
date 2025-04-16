@@ -18,3 +18,7 @@ func (l Line) Run() float64 {
 func (l Line) Length() float64 {
 	return math.Sqrt(l.Rise()*l.Rise() + l.Run()*l.Run())
 }
+
+func (l Line) Slope() float64 {
+	return l.Rise() / l.Run()
+}
