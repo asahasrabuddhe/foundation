@@ -25,4 +25,8 @@ impl Line {
             self.rise() / self.run()
         }
     }
+
+    pub fn is_parallel_to(&self, other: &Line) -> bool {
+        self.slope() == other.slope()
+    }
 }
