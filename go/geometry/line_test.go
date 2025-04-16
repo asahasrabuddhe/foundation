@@ -30,3 +30,17 @@ func TestLine_CalculateRun(t *testing.T) {
 		t.Errorf("Expected run to be %f, got %f", expectedRun, l.Run())
 	}
 }
+
+func TestLine_CalculateLength(t *testing.T) {
+	// Test that the length (distance between points) is calculated correctly
+
+	p1 := Point{X: 0.0, Y: 0.0}
+	p2 := Point{X: 3.0, Y: 4.0}
+
+	l := Line{Start: p1, End: p2}
+	expectedLength := 5.0 // Pythagorean theorem: sqrt(3^2 + 4^2)
+
+	if l.Length() != expectedLength {
+		t.Errorf("Expected length to be %f, got %f", expectedLength, l.Length())
+	}
+}
