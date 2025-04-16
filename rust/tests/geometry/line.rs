@@ -48,3 +48,16 @@ fn test_line_is_parallel() {
 
     assert!(line1.is_parallel_to(&line2));
 }
+
+#[test]
+fn test_line_is_perpendicular() {
+    let start1 = Point { x: 0.0, y: 0.0 };
+    let end1 = Point { x: 2.0, y: 2.0 };
+    let line1 = Line { start: start1, end: end1 };
+
+    let start2 = Point { x: 0.0, y: 0.0 };
+    let end2 = Point { x: -2.0, y: 2.0 };
+    let line2 = Line { start: start2, end: end2 };
+
+    assert!(line1.is_perpendicular_to(&line2));
+}
