@@ -52,4 +52,22 @@ public class QuadrilateralTest {
 
         assertEquals(14.0, quad.calculatePerimeter());
     }
+
+    @Test
+    void areaMethodShouldThrowUnsupportedException() {
+        Point a = new Point(0, 0);
+        Point b = new Point(1, 0);
+        Point c = new Point(1, 1);
+        Point d = new Point(0, 1);
+
+        Quadrilateral quad = new Quadrilateral(
+                new Line(a, b),
+                new Line(b, c),
+                new Line(c, d),
+                new Line(d, a)
+        );
+
+        assertThrows(UnsupportedOperationException.class, quad::calculateArea);
+    }
+
 }
