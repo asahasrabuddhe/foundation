@@ -1,6 +1,6 @@
 package com.technogise.foundation.geometry;
 
-public class Quadrilateral {
+public class Quadrilateral extends Shape{
     protected final Line ab, bc, cd, da;
 
     public Quadrilateral(Line ab, Line bc, Line cd, Line da) {
@@ -18,5 +18,15 @@ public class Quadrilateral {
                 lines[1].b().equals(lines[2].a()) &&
                 lines[2].b().equals(lines[3].a()) &&
                 lines[3].b().equals(lines[0].a());
+    }
+
+    @Override
+    public double calculatePerimeter() {
+        return ab.length() + bc.length() + cd.length() + da.length();
+    }
+
+    @Override
+    public double calculateArea() {
+        throw new UnsupportedOperationException("Quadrilateral calculate area is not implemented yet.");
     }
 }

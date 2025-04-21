@@ -2,6 +2,7 @@ package com.technogise.foundation.geometry;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class QuadrilateralTest {
@@ -33,5 +34,22 @@ public class QuadrilateralTest {
         Line da = new Line(d, new Point(5, 5)); // Invalid endpoint
 
         assertThrows(IllegalArgumentException.class, () -> new Quadrilateral(ab, bc, cd, da));
+    }
+
+    @Test
+    void perimeterCalculationShouldBeAccurate() {
+        Point a = new Point(0, 0);
+        Point b = new Point(3, 0);
+        Point c = new Point(3, 4);
+        Point d = new Point(0, 4);
+
+        Line ab = new Line(a, b);
+        Line bc = new Line(b, c);
+        Line cd = new Line(c, d);
+        Line da = new Line(d, a);
+
+        Quadrilateral quad = new Quadrilateral(ab, bc, cd, da);
+
+        assertEquals(14.0, quad.calculatePerimeter());
     }
 }
