@@ -25,6 +25,16 @@ public record Line(Point a, Point b) {
     }
 
     public boolean isPerpendicularTo(Line other) {
-        return this.slope() * other.slope() == -1;
+        double slope1 = this.slope();
+        double slope2 = other.slope();
+
+        // Handle horizontal vs vertical case
+        if ((Double.isInfinite(slope1) && slope2 == 0.0) ||
+                (Double.isInfinite(slope2) && slope1 == 0.0)) {
+            return true;
+        }
+
+        // General case
+        return Math.abs(slope1 * slope2 + 1) < 1e-9;
     }
 }
