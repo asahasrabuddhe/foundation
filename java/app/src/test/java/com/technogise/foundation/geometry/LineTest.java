@@ -1,6 +1,7 @@
 package com.technogise.foundation.geometry;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -80,4 +81,17 @@ public class LineTest {
 
         assertEquals(-1, slope1 * slope2);
     }
+
+    @Test
+    void horizontalAndVerticalLinesArePerpendicular() {
+        Point a = new Point(0, 0);
+        Point b = new Point(4, 0); // horizontal
+        Point c = new Point(4, 3); // vertical
+
+        Line ab = new Line(a, b);
+        Line bc = new Line(b, c);
+
+        assertTrue(ab.isPerpendicularTo(bc));
+    }
+
 }
