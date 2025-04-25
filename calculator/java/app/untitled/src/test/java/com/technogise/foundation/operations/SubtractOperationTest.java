@@ -1,4 +1,4 @@
-package com.technogise.foundation.calculator;
+package com.technogise.foundation.operations;
 
 import org.junit.jupiter.api.Test;
 

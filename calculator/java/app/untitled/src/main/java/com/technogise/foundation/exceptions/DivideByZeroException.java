@@ -1,4 +1,4 @@
-package com.technogise.foundation.calculator.exception;
+package com.technogise.foundation.exceptions;
 
 public class DivideByZeroException extends RuntimeException {
     public DivideByZeroException() {

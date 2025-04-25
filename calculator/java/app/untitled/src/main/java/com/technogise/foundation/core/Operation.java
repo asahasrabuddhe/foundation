@@ -1,4 +1,4 @@
-package com.technogise.foundation.calculator;
+package com.technogise.foundation.core;
 
 public interface Operation {
     String getSymbol(); // e.g. "+", "-"

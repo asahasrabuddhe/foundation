@@ -1,6 +1,6 @@
-package com.technogise.foundation.calculator;
+package com.technogise.foundation.operations;
 
-import com.technogise.foundation.calculator.exception.DivideByZeroException;
+import com.technogise.foundation.exceptions.DivideByZeroException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
