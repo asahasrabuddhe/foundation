@@ -1,6 +1,5 @@
-package com.technogise.foundation;
+package com.technogise.foundation.calculator;
 
-import com.technogise.foundation.calculator.SubtractOperation;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
