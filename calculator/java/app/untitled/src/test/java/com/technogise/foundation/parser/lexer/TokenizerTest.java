@@ -1,4 +1,4 @@
-package com.technogise.foundation.tokenizer;
+package com.technogise.foundation.parser.lexer;
 
 import org.junit.jupiter.api.Test;
 

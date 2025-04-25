@@ -1,6 +1,7 @@
-package com.technogise.foundation.calculator;
+package com.technogise.foundation.operations;
 
-import com.technogise.foundation.calculator.exception.DivideByZeroException;
+import com.technogise.foundation.exceptions.DivideByZeroException;
+import com.technogise.foundation.core.Operation;
 
 public class DivideOperation implements Operation {
     @Override
