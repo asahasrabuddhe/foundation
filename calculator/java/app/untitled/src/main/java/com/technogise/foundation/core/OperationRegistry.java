@@ -12,8 +12,12 @@ public class OperationRegistry {
         operations.put(operation.getSymbol(), operation);
     }
 
+    public boolean isOperator(String symbol) {
+        return operations.containsKey(symbol);
+    }
+
     public Operation get(String symbol) {
-        if (!operations.containsKey(symbol)) {
+        if (!isOperator(symbol)) {
             throw new UnregisteredSymbolException(symbol);
         }
         return operations.get(symbol);
