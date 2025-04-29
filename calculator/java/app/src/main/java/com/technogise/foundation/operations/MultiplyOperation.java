@@ -9,6 +9,11 @@ public class MultiplyOperation implements Operation {
     }
 
     @Override
+    public int getPrecedence() {
+        return 2;
+    }
+
+    @Override
     public double apply(double a, double b) {
         return a * b;
     }

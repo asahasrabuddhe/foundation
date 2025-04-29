@@ -9,6 +9,11 @@ public class SubtractOperation implements Operation {
     }
 
     @Override
+    public int getPrecedence() {
+        return 1;
+    }
+
+    @Override
     public double apply(double a, double b) {
         return a - b;
     }
