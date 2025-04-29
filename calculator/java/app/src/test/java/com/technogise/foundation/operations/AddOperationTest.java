@@ -9,6 +9,7 @@ public class AddOperationTest {
     void testAddOperation() {
         AddOperation addOperation = new AddOperation();
         assertEquals("+", addOperation.getSymbol());
+        assertEquals(1, addOperation.getPrecedence());
         assertEquals(3.0, addOperation.apply(1.0, 2.0));
     }
 }

@@ -9,6 +9,7 @@ public class MultiplyOperationTest {
     void testMultiplyOperation() {
         MultiplyOperation multiplyOperation = new MultiplyOperation();
         assertEquals("*", multiplyOperation.getSymbol());
+        assertEquals(2, multiplyOperation.getPrecedence());
         assertEquals(12.0, multiplyOperation.apply(6.0, 2.0));
     }
 }

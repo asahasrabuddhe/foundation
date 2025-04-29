@@ -11,10 +11,15 @@ public class Parser {
         List<String> output = new ArrayList<>();
         Stack<String> operators = new Stack<>();
 
-        for (String token: tokens) {
-            if(token.matches("^\\d*\\.?\\d*$")) {
+        for (String token : tokens) {
+            if (token.matches("^\\d*\\.?\\d*$")) {
                 output.add(token);
             } else if (registry.isOperator(token)) {
+                while (!operators.isEmpty() &&
+                        registry.isOperator(operators.peek()) &&
+                        registry.get(operators.peek()).getPrecedence() >= registry.get(token).getPrecedence()) {
+                    output.add(operators.pop());
+                }
                 operators.push(token);
             }
         }

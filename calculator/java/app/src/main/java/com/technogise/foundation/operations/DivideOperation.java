@@ -10,6 +10,11 @@ public class DivideOperation implements Operation {
     }
 
     @Override
+    public int getPrecedence() {
+        return 2;
+    }
+
+    @Override
     public double apply(double a, double b) {
         if (b == 0) {
             throw new DivideByZeroException();
