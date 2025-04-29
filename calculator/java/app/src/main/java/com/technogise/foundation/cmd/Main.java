@@ -1,4 +1,4 @@
-package com.technogise.foundation.src;
+package com.technogise.foundation.cmd;
 
 import com.technogise.foundation.core.Calculator;
 import com.technogise.foundation.core.OperationRegistry;
