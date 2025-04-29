@@ -2,6 +2,8 @@ package com.technogise.foundation.parser;
 
 import com.technogise.foundation.core.OperationRegistry;
 import com.technogise.foundation.core.Operation;
+import com.technogise.foundation.operations.AddOperation;
+import com.technogise.foundation.operations.MultiplyOperation;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,7 +14,7 @@ public class ParserTest {
     @Test
     void shouldConvertSimpleAdditionToPostfix() {
         List<String> tokens = List.of("1", "+", "2");
-        List<String> result = Parser.toPostfix(tokens, registryWith("+"));
+        List<String> result = Parser.toPostfix(tokens, registryWith(new AddOperation()));
         List<String> postfix = List.of("1", "2", "+");
 
         assertEquals(postfix, result);
@@ -21,7 +23,7 @@ public class ParserTest {
     @Test
     void shouldParseMultipleOperatorsLeftToRight() {
         List<String> tokens = List.of("1", "+", "2", "*", "3");
-        List<String> result = Parser.toPostfix(tokens, registryWith("+", "*"));
+        List<String> result = Parser.toPostfix(tokens, registryWith(new AddOperation(), new MultiplyOperation()));
         List<String> postfix = List.of("1", "2", "3", "*", "+");
 
         assertEquals(postfix, result);
@@ -36,13 +38,10 @@ public class ParserTest {
         assertEquals(postfix, result);
     }
 
-    private OperationRegistry registryWith(String... ops) {
+    private OperationRegistry registryWith(Operation... ops) {
         OperationRegistry reg = new OperationRegistry();
-        for (String op : ops) {
-            reg.register(new Operation() {
-                public String getSymbol() { return op; }
-                public double apply(double a, double b) { return 0; }
-            });
+        for (Operation op : ops) {
+            reg.register(op);
         }
         return reg;
     }
