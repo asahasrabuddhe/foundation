@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
     @Test
@@ -68,6 +69,56 @@ public class ParserTest {
 
         assertEquals(postfix, result);
     }
+
+    @Test
+    void shouldRespectBracketsOverPrecedence() {
+        List<String> tokens = List.of("(", "2", "+", "3", ")", "*", "4");
+        List<String> result = Parser.toPostfix(tokens, registryWith(
+                new AddOperation(), new MultiplyOperation()));
+        List<String> expected = List.of("2", "3", "+", "4", "*");
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void shouldHandleNestedBracketsCorrectly() {
+        List<String> tokens = List.of("(", "1", "+", "(", "2", "+", "3", ")", ")", "*", "4");
+        List<String> result = Parser.toPostfix(tokens, registryWith(
+                new AddOperation(), new MultiplyOperation()));
+        List<String> expected = List.of("1", "2", "3", "+", "+", "4", "*");
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void shouldHandleMultipleBracketsWithDifferentOperators() {
+        List<String> tokens = List.of("(", "6", "+", "2", ")", "*", "(", "3", "-", "1", ")");
+        List<String> result = Parser.toPostfix(tokens, registryWith(
+                new AddOperation(), new MultiplyOperation(), new SubtractOperation()));
+        List<String> expected = List.of("6", "2", "+", "3", "1", "-", "*");
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void shouldThrowIfLeftBracketIsNotClosed() {
+        List<String> tokens = List.of("(", "2", "+", "3", "*", "4");
+
+        assertThrows(IllegalArgumentException.class, () ->
+                Parser.toPostfix(tokens, registryWith(
+                        new AddOperation(), new MultiplyOperation())));
+    }
+
+    @Test
+    void shouldThrowIfRightBracketIsUnmatched() {
+        List<String> tokens = List.of("2", "+", "3", ")", "*", "4");
+
+        assertThrows(IllegalArgumentException.class, () ->
+                Parser.toPostfix(tokens, registryWith(
+                        new AddOperation(), new MultiplyOperation())));
+    }
+
+
 
     private OperationRegistry registryWith(Operation... ops) {
         OperationRegistry reg = new OperationRegistry();
