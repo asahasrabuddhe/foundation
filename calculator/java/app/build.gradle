@@ -29,7 +29,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.technogise.foundation.src.Main'
+    mainClass = 'com.technogise.foundation.cmd.Main'
 
     // Allow console input
     run {
