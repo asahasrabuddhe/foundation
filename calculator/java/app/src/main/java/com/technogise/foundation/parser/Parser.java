@@ -21,11 +21,27 @@ public class Parser {
                     output.add(operators.pop());
                 }
                 operators.push(token);
+            } else if (token.equals("(")) {
+                operators.push(token);
+            } else if (token.equals(")")) {
+                while (!operators.isEmpty() && !operators.peek().equals("(")) {
+                    output.add(operators.pop());
+                }
+                if (operators.isEmpty()) {
+                    throw new IllegalArgumentException("Mismatched parentheses");
+                }
+                operators.pop(); // discard the '('
+            } else {
+                throw new IllegalArgumentException("Unexpected token: " + token);
             }
         }
 
         while (!operators.isEmpty()) {
-            output.add(operators.pop());
+            String operator = operators.pop();
+            if (operator.equals("(") || operator.equals(")")) {
+                throw new IllegalArgumentException("Mismatched parentheses");
+            }
+            output.add(operator);
         }
 
         return output;
