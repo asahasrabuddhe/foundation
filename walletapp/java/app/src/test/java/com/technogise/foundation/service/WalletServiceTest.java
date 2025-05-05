@@ -17,4 +17,11 @@ public class WalletServiceTest {
         User alice = new User("alice");
         walletService.registerUser(alice);
     }
+
+    @Test
+    void shouldNotAllowDuplicateUser() {
+        User bob = new User("bob");
+        walletService.registerUser(bob);
+        walletService.registerUser(new User("bob"));
+    }
 }
