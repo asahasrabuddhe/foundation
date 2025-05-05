@@ -1,6 +1,7 @@
 package com.technogise.foundation.service;
 
 import com.technogise.foundation.exceptions.DuplicateUserException;
+import com.technogise.foundation.exceptions.UserDoesNotExistException;
 import com.technogise.foundation.model.User;
 
 import java.util.HashMap;
@@ -16,24 +17,27 @@ public class WalletService implements IWalletService {
     }
 
     @Override
-    public void registerUser(String user) {
-        if (users.containsKey(user)) {
+    public void registerUser(String username) {
+        if (users.containsKey(username)) {
             throw new DuplicateUserException("User already exists");
         }
-        users.put(user, new User(user));
+        users.put(username, new User(username));
     }
 
     @Override
-    public void topUp(String user, double amount) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public void topUp(String username, double amount) {
+        if (!users.containsKey(username)) {
+            throw new UserDoesNotExistException("User " + username + " does not exist");
+        }
+        users.get(username).getAccount().credit(amount);
     }
 
-    public void transfer(String from, String to, double amount) {
+    public void transfer(String fromUsername, String toUsername, double amount) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @Override
-    public double getBalance(String user) {
+    public double getBalance(String username) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }
