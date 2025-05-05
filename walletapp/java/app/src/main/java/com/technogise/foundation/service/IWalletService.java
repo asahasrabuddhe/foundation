@@ -1,10 +1,8 @@
 package com.technogise.foundation.service;
 
-import com.technogise.foundation.model.User;
-
 public interface IWalletService {
-    void registerUser(User user);
-    void topUp(User user, double amount);
-    void transfer(User from, User to, double amount);
-    double getBalance(User user);
+    void registerUser(String username);
+    void topUp(String username, double amount);
+    void transfer(String fromUsername, String toUsername, double amount);
+    double getBalance(String username);
 }
