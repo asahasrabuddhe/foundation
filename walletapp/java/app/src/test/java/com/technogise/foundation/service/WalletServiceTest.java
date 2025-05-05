@@ -29,6 +29,17 @@ public class WalletServiceTest {
     }
 
     @Test
+    void shouldGetUserSuccessfully() {
+        walletService.registerUser("alice");
+        assertEquals("alice", walletService.getUser("alice").getUsername());
+    }
+
+    @Test
+    void shouldFailToGetUserIfUserDoesNotExist() {
+        assertThrows(UserDoesNotExistException.class, () -> walletService.getUser("alice"));
+    }
+
+    @Test
     void shouldTopUpBalance() {
         walletService.registerUser("alice");
         walletService.topUp("alice", 100);
