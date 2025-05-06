@@ -1,108 +1,59 @@
 package com.technogise.foundation.cli;
 
-import com.technogise.foundation.model.Transaction;
-import com.technogise.foundation.model.User;
+ import com.technogise.foundation.cli.command.*;
 import com.technogise.foundation.service.*;
 
+import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class WalletCLI {
-    private final UserRegistry userRegistry;
-    private final MoneyOps moneyOps;
-    private final BalanceEnquiry balanceEnquiry;
-    private final TransactionReader transactionReader;
-    private Scanner scanner;
+    private final Map<Integer, CommandStrategy> commands;
+    private final Scanner scanner;
+    private final PrintStream out;
 
     public WalletCLI(UserRegistry userRegistry, MoneyOps moneyOps, BalanceEnquiry balanceEnquiry, TransactionReader transactionReader) {
-        this.userRegistry = userRegistry;
-        this.moneyOps = moneyOps;
-        this.balanceEnquiry = balanceEnquiry;
-        this.transactionReader = transactionReader;
         this.scanner = new Scanner(System.in);
+        this.out = System.out;
+        this.commands = new HashMap<>();
+        
+        // Initialize commands
+        commands.put(1, new RegisterUserCommand(userRegistry, scanner, out));
+        commands.put(2, new TopUpCommand(moneyOps, scanner, out));
+        commands.put(3, new TransferCommand(moneyOps, scanner, out));
+        commands.put(4, new CheckBalanceCommand(balanceEnquiry, scanner, out));
+        commands.put(5, new ViewAllTransactionsCommand(transactionReader, out));
+        commands.put(6, new ViewUserTransactionsCommand(transactionReader, userRegistry, scanner, out));
+        commands.put(7, new ExitCommand(out));
     }
 
     public void start() {
         while (true) {
-            System.out.println("\nWelcome to Wallet CLI");
-            System.out.println("Please choose an option:");
-            System.out.println("1. Register a user");
-            System.out.println("2. Top up money into your wallet");
-            System.out.println("3. Transfer money to another user");
-            System.out.println("4. Check balance");
-            System.out.println("5. View all transactions");
-            System.out.println("6. View user's transactions");
-            System.out.println("7. Exit");
-
+            printMenu();
             int choice = Integer.parseInt(scanner.nextLine());
 
             try {
-                switch (choice) {
-                    case 1 -> registerUser();
-                    case 2 -> topUp();
-                    case 3 -> transferMoney();
-                    case 4 -> checkBalance();
-                    case 5 -> viewAllTransactions();
-                    case 6 -> viewUserTransactions();
-                    case 7 -> {
-                        System.out.println("Exiting...");
+                CommandStrategy command = commands.get(choice);
+                if (command != null) {
+                    command.execute();
+                    if (command instanceof ExitCommand exitCommand && exitCommand.shouldExit()) {
                         return;
                     }
-                    default -> System.out.println("Invalid option");
+                } else {
+                    out.println("Invalid option");
                 }
             } catch (Exception ex) {
-                System.out.println("Error: " + ex.getMessage());
+                out.println("Error: " + ex.getMessage());
             }
         }
     }
 
-    private void registerUser() {
-        System.out.println("Enter username: ");
-        String username = scanner.nextLine();
-        userRegistry.registerUser(username);
-        System.out.println("User registered successfully.");
-    }
-
-    private void topUp() {
-        System.out.println("Enter username: ");
-        String username = scanner.nextLine();
-        System.out.println("Enter amount: ");
-        double amount = Double.parseDouble(scanner.nextLine());
-        moneyOps.topUp(username, amount);
-        System.out.println("Top up successful.");
-    }
-
-    private void transferMoney() {
-        System.out.println("Enter username:");
-        String fromUsername = scanner.nextLine();
-        System.out.println("Enter recipient's username:");
-        String toUsername = scanner.nextLine();
-        System.out.println("Enter amount:");
-        double amount = Double.parseDouble(scanner.nextLine());
-        moneyOps.transfer(fromUsername, toUsername, amount);
-        System.out.println("Transfer successful.");
-    }
-
-    private void checkBalance() {
-        System.out.println("Enter username:");
-        String username = scanner.nextLine();
-        double balance = balanceEnquiry.getBalance(username);
-        System.out.println("Balance: " + balance);
-    }
-
-    private void viewAllTransactions() {
-        System.out.println("All transactions:");
-        transactionReader.getAllTransactions().forEach(this::printTransaction);
-    }
-
-    private void viewUserTransactions() {
-        System.out.println("Enter username: ");
-        String username = scanner.nextLine();
-        User user = userRegistry.getUser(username);
-        transactionReader.getTransactionsForUser(user).forEach(this::printTransaction);
-    }
-
-    private void printTransaction(Transaction txn) {
-        System.out.printf("[%s] %s -> %s : %f\n", txn.getTimestamp(), txn.getFromUser().getUsername(), txn.getToUser().getUsername(), txn.getAmount());
+    private void printMenu() {
+        out.println("\nWelcome to Wallet CLI");
+        out.println("Please choose an option:");
+        commands.forEach((key, command) -> 
+            out.printf("%d. %s%n", key, command.getDescription()));
     }
 }
 
