@@ -10,7 +10,7 @@ public class WalletSystem {
     public static void main(String[] args) {
         ITransactionHistoryService transactionHistoryService = new InMemoryTransactionHistoryService();
         IWalletService walletService = new WalletService(transactionHistoryService);
-        WalletCLI cli = new WalletCLI(walletService, transactionHistoryService);
+        WalletCLI cli = new WalletCLI(walletService, walletService, walletService, transactionHistoryService);
         cli.start();
     }
 }
