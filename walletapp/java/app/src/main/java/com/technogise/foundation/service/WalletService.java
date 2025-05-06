@@ -26,6 +26,12 @@ public class WalletService implements IWalletService {
     }
 
     @Override
+    public User getUser(String username) {
+        validateUser(username);
+        return users.get(username);
+    }
+
+    @Override
     public void topUp(String username, double amount) {
         validateUser(username);
 
