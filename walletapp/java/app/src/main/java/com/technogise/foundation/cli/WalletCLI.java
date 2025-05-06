@@ -99,7 +99,7 @@ public class WalletCLI {
     }
 
     private void printTransaction(Transaction txn) {
-        System.out.printf("[%s] %s -> %s : %f\n", txn.getTimestamp(), txn.getFromUser(), txn.getToUser(), txn.getAmount());
+        System.out.printf("[%s] %s -> %s : %f\n", txn.getTimestamp(), txn.getFromUser().getUsername(), txn.getToUser().getUsername(), txn.getAmount());
     }
 }
 
