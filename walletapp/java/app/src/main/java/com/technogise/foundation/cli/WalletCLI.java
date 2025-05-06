@@ -2,19 +2,19 @@ package com.technogise.foundation.cli;
 
 import com.technogise.foundation.model.Transaction;
 import com.technogise.foundation.model.User;
-import com.technogise.foundation.service.ITransactionHistoryService;
+import com.technogise.foundation.service.TransactionReader;
 import com.technogise.foundation.service.IWalletService;
 
 import java.util.Scanner;
 
 public class WalletCLI {
     private final IWalletService walletService;
-    private final ITransactionHistoryService transactionHistoryService;
+    private final TransactionReader transactionReader;
     private Scanner scanner;
 
-    public WalletCLI(IWalletService walletService, ITransactionHistoryService transactionHistoryService) {
+    public WalletCLI(IWalletService walletService, TransactionReader transactionReader) {
         this.walletService = walletService;
-        this.transactionHistoryService = transactionHistoryService;
+        this.transactionReader = transactionReader;
         this.scanner = new Scanner(System.in);
     }
 
@@ -88,14 +88,14 @@ public class WalletCLI {
 
     private void viewAllTransactions() {
         System.out.println("All transactions:");
-        transactionHistoryService.getAllTransactions().forEach(this::printTransaction);
+        transactionReader.getAllTransactions().forEach(this::printTransaction);
     }
 
     private void viewUserTransactions() {
         System.out.println("Enter username: ");
         String username = scanner.nextLine();
         User user = walletService.getUser(username);
-        transactionHistoryService.getTransactionsForUser(user).forEach(this::printTransaction);
+        transactionReader.getTransactionsForUser(user).forEach(this::printTransaction);
     }
 
     private void printTransaction(Transaction txn) {

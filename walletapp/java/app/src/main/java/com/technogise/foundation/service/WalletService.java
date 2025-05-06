@@ -10,10 +10,10 @@ import java.util.Map;
 
 public class WalletService implements IWalletService {
     private final Map<String, User> users;
-    private final ITransactionHistoryService transactionHistoryService;
+    private final TransactionRecorder transactionRecorder;
 
-    public WalletService(ITransactionHistoryService transactionHistoryService) {
-        this.transactionHistoryService = transactionHistoryService;
+    public WalletService(TransactionRecorder transactionRecorder) {
+        this.transactionRecorder = transactionRecorder;
         this.users = new HashMap<>();
     }
 
@@ -39,7 +39,7 @@ public class WalletService implements IWalletService {
 
         user.getAccount().credit(amount);
 
-        transactionHistoryService.recordTransaction(Transaction.topUp(user, amount));
+        transactionRecorder.recordTransaction(Transaction.topUp(user, amount));
     }
 
     @Override
@@ -53,7 +53,7 @@ public class WalletService implements IWalletService {
         sender.getAccount().debit(amount);
         receiver.getAccount().credit(amount);
 
-        transactionHistoryService.recordTransaction(Transaction.transfer(sender, receiver, amount));
+        transactionRecorder.recordTransaction(Transaction.transfer(sender, receiver, amount));
     }
 
     @Override
