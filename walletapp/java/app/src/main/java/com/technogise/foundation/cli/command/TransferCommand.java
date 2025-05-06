@@ -18,9 +18,9 @@ public class TransferCommand implements CommandStrategy {
 
     @Override
     public void execute() {
-        out.print("Enter your username: ");
+        out.print("Enter a user's username: ");
         String from = in.nextLine();
-        out.print("Enter recipient's username: ");
+        out.print("Enter the recipient's username: ");
         String to = in.nextLine();
         out.print("Enter amount: ");
         double amount = Double.parseDouble(in.nextLine());

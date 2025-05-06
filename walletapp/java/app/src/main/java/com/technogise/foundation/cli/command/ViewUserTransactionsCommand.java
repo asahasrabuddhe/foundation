@@ -30,7 +30,7 @@ public class ViewUserTransactionsCommand implements CommandStrategy {
 
     @Override
     public String getDescription() {
-        return "View user's transactions";
+        return "View a user's transactions";
     }
 
     private void printTransaction(Transaction txn) {
