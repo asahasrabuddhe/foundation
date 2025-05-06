@@ -14,7 +14,7 @@ import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TopUpTransactionTest {
+public class TopUpCommandTest {
     @Test
     void shouldTopUpUserSuccessfully() {
         String input = "alice\n100\n";
@@ -26,7 +26,7 @@ public class TopUpTransactionTest {
         IWalletService wallet = new WalletService(recorder);
         wallet.registerUser("alice");
 
-        CommandStrategy strategy = new TopUpTransaction(wallet, new Scanner(in), out);
+        CommandStrategy strategy = new TopUpCommand(wallet, new Scanner(in), out);
         strategy.execute();
 
         assertTrue(outStream.toString().contains("Top-up successful"));

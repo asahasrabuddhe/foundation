@@ -5,12 +5,12 @@ import com.technogise.foundation.service.MoneyOps;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class TopUpTransaction implements CommandStrategy{
+public class TopUpCommand implements CommandStrategy{
     private final MoneyOps moneyOps;
     private final Scanner in;
     private final PrintStream out;
 
-    public TopUpTransaction(MoneyOps moneyOps, Scanner in, PrintStream out) {
+    public TopUpCommand(MoneyOps moneyOps, Scanner in, PrintStream out) {
         this.moneyOps = moneyOps;
         this.in = in;
         this.out = out;
