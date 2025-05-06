@@ -28,6 +28,6 @@ public class TopUpCommand implements CommandStrategy{
 
     @Override
     public String getDescription() {
-        return "Top up money into your wallet";
+        return "Top up money into a user's wallet";
     }
 }
