@@ -2,18 +2,21 @@ package com.technogise.foundation.cli;
 
 import com.technogise.foundation.model.Transaction;
 import com.technogise.foundation.model.User;
-import com.technogise.foundation.service.TransactionReader;
-import com.technogise.foundation.service.IWalletService;
+import com.technogise.foundation.service.*;
 
 import java.util.Scanner;
 
 public class WalletCLI {
-    private final IWalletService walletService;
+    private final UserRegistry userRegistry;
+    private final MoneyOps moneyOps;
+    private final BalanceEnquiry balanceEnquiry;
     private final TransactionReader transactionReader;
     private Scanner scanner;
 
-    public WalletCLI(IWalletService walletService, TransactionReader transactionReader) {
-        this.walletService = walletService;
+    public WalletCLI(UserRegistry userRegistry, MoneyOps moneyOps, BalanceEnquiry balanceEnquiry, TransactionReader transactionReader) {
+        this.userRegistry = userRegistry;
+        this.moneyOps = moneyOps;
+        this.balanceEnquiry = balanceEnquiry;
         this.transactionReader = transactionReader;
         this.scanner = new Scanner(System.in);
     }
@@ -55,7 +58,7 @@ public class WalletCLI {
     private void registerUser() {
         System.out.println("Enter username: ");
         String username = scanner.nextLine();
-        walletService.registerUser(username);
+        userRegistry.registerUser(username);
         System.out.println("User registered successfully.");
     }
 
@@ -64,7 +67,7 @@ public class WalletCLI {
         String username = scanner.nextLine();
         System.out.println("Enter amount: ");
         double amount = Double.parseDouble(scanner.nextLine());
-        walletService.topUp(username, amount);
+        moneyOps.topUp(username, amount);
         System.out.println("Top up successful.");
     }
 
@@ -75,14 +78,14 @@ public class WalletCLI {
         String toUsername = scanner.nextLine();
         System.out.println("Enter amount:");
         double amount = Double.parseDouble(scanner.nextLine());
-        walletService.transfer(fromUsername, toUsername, amount);
+        moneyOps.transfer(fromUsername, toUsername, amount);
         System.out.println("Transfer successful.");
     }
 
     private void checkBalance() {
         System.out.println("Enter username:");
         String username = scanner.nextLine();
-        double balance = walletService.getBalance(username);
+        double balance = balanceEnquiry.getBalance(username);
         System.out.println("Balance: " + balance);
     }
 
@@ -94,7 +97,7 @@ public class WalletCLI {
     private void viewUserTransactions() {
         System.out.println("Enter username: ");
         String username = scanner.nextLine();
-        User user = walletService.getUser(username);
+        User user = userRegistry.getUser(username);
         transactionReader.getTransactionsForUser(user).forEach(this::printTransaction);
     }
 

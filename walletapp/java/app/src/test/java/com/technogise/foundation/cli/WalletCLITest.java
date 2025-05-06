@@ -18,7 +18,7 @@ public class WalletCLITest {
 
         ITransactionHistoryService history = new InMemoryTransactionHistoryService();
         IWalletService wallet = new WalletService(history);
-        WalletCLI cli = new WalletCLI(wallet, history);
+        WalletCLI cli = new WalletCLI(wallet, wallet, wallet, history);
 
         assertDoesNotThrow(cli::start);
     }
