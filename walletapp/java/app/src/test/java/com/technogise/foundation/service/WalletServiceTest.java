@@ -3,6 +3,8 @@ package com.technogise.foundation.service;
 import com.technogise.foundation.exceptions.DuplicateUserException;
 import com.technogise.foundation.exceptions.InsufficientBalanceException;
 import com.technogise.foundation.exceptions.UserDoesNotExistException;
+import com.technogise.foundation.repository.InMemoryTransactionStore;
+import com.technogise.foundation.repository.InMemoryUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,15 +13,20 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WalletServiceTest {
     private IWalletService walletService;
+    private InMemoryUserRepository userRepository;
+    private InMemoryTransactionStore transactionStore;
 
     @BeforeEach
     void setUp() {
-        walletService = new WalletService(new InMemoryTransactionHistoryService());
+        userRepository = new InMemoryUserRepository();
+        transactionStore = new InMemoryTransactionStore();
+        walletService = new WalletService(userRepository, transactionStore);
     }
 
     @Test
     void shouldRegisterUserSuccessfully() {
         walletService.registerUser("alice");
+        assertEquals("alice", walletService.getUser("alice").getUsername());
     }
 
     @Test

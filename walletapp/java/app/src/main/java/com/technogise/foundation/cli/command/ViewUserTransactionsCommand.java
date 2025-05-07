@@ -1,7 +1,7 @@
 package com.technogise.foundation.cli.command;
 
 import com.technogise.foundation.model.Transaction;
-import com.technogise.foundation.service.TransactionReader;
+import com.technogise.foundation.repository.TransactionReader;
 import com.technogise.foundation.service.UserRegistry;
 
 import java.io.PrintStream;
