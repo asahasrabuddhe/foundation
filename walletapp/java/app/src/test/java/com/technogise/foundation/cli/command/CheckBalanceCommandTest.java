@@ -1,8 +1,10 @@
 package com.technogise.foundation.cli.command;
 
+import com.technogise.foundation.repository.InMemoryTransactionStore;
+import com.technogise.foundation.repository.InMemoryUserRepository;
+import com.technogise.foundation.repository.TransactionStore;
+import com.technogise.foundation.repository.UserRepository;
 import com.technogise.foundation.service.IWalletService;
-import com.technogise.foundation.service.InMemoryTransactionHistoryService;
-import com.technogise.foundation.service.TransactionRecorder;
 import com.technogise.foundation.service.WalletService;
 import org.junit.jupiter.api.Test;
 
@@ -21,14 +23,16 @@ public class CheckBalanceCommandTest {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(outStream);
 
-        TransactionRecorder recorder = new InMemoryTransactionHistoryService();
-        IWalletService wallet = new WalletService(recorder);
+        UserRepository userRepository = new InMemoryUserRepository();
+        TransactionStore recorder = new InMemoryTransactionStore();
+        IWalletService wallet = new WalletService(userRepository, recorder);
         wallet.registerUser("alice");
         wallet.topUp("alice", 100);
 
         CommandStrategy strategy = new CheckBalanceCommand(wallet, new Scanner(in), out);
         strategy.execute();
 
+        System.out.println(outStream.toString());
         assertTrue(outStream.toString().contains("Balance: 100.0"));
     }
 } 

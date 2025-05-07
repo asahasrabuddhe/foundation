@@ -17,18 +17,16 @@ public class AccountTest {
     @Test
     void accountShouldBeCreditedCorrectly() {
         Account account = new Account();
-        Account creditedAccount = account.credit(100);
-        assertEquals(100, creditedAccount.getBalance());
-        assertEquals(0, account.getBalance()); // Original account unchanged
+        account.credit(100);
+        assertEquals(100, account.getBalance());
     }
 
     @Test
     void accountShouldBeDebitedCorrectly() {
         Account account = new Account();
-        Account creditedAccount = account.credit(100);
-        Account debitedAccount = creditedAccount.debit(30);
-        assertEquals(70, debitedAccount.getBalance());
-        assertEquals(100, creditedAccount.getBalance()); // Original account unchanged
+        account.credit(100);
+        account.debit(30);
+        assertEquals(70, account.getBalance());
     }
 
     @Test
@@ -42,7 +40,7 @@ public class AccountTest {
     void accountShouldNotAllowDebitingMoreThanBalance() {
         Account account = new Account();
         assertThrows(InsufficientBalanceException.class, () -> account.debit(20));
-        Account creditedAccount = account.credit(50);
-        assertThrows(InsufficientBalanceException.class, () -> creditedAccount.debit(70));
+        account.credit(50);
+        assertThrows(InsufficientBalanceException.class, () -> account.debit(70));
     }
 }

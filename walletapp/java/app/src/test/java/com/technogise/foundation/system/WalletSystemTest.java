@@ -1,9 +1,11 @@
 package com.technogise.foundation.system;
 
 import com.technogise.foundation.model.User;
-import com.technogise.foundation.service.ITransactionHistoryService;
+import com.technogise.foundation.repository.InMemoryTransactionStore;
+import com.technogise.foundation.repository.InMemoryUserRepository;
+import com.technogise.foundation.repository.TransactionStore;
+import com.technogise.foundation.repository.UserRepository;
 import com.technogise.foundation.service.IWalletService;
-import com.technogise.foundation.service.InMemoryTransactionHistoryService;
 import com.technogise.foundation.service.WalletService;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class WalletSystemTest {
     @Test
     void shouldRunWalletOperationsEndToEnd() {
-        ITransactionHistoryService historyService = new InMemoryTransactionHistoryService();
-        IWalletService walletService = new WalletService(historyService);
+        UserRepository userRepository = new InMemoryUserRepository();
+        TransactionStore transactionStore = new InMemoryTransactionStore();
+        IWalletService walletService = new WalletService(userRepository, transactionStore);
 
         walletService.registerUser("alice");
         walletService.registerUser("bob");
@@ -23,12 +26,12 @@ public class WalletSystemTest {
         assertEquals(60, walletService.getBalance("alice"));
         assertEquals(40, walletService.getBalance("bob"));
 
-        assertEquals(2, historyService.getAllTransactions().size());
+        assertEquals(2, transactionStore.getAllTransactions().size());
 
         User alice = walletService.getUser("alice");
-        assertEquals(2, historyService.getTransactionsForUser(alice).size());
+        assertEquals(2, transactionStore.getTransactionsForUser(alice).size());
 
         User bob = walletService.getUser("bob");
-        assertEquals(1, historyService.getTransactionsForUser(bob).size());
+        assertEquals(1, transactionStore.getTransactionsForUser(bob).size());
     }
 }
