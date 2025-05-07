@@ -1,10 +1,9 @@
 package com.technogise.foundation.cli.command;
 
 import com.technogise.foundation.model.Transaction;
-import com.technogise.foundation.service.TransactionReader;
+import com.technogise.foundation.repository.TransactionReader;
 
 import java.io.PrintStream;
-import java.util.Scanner;
 
 public class ViewAllTransactionsCommand implements CommandStrategy {
     private final TransactionReader transactionReader;

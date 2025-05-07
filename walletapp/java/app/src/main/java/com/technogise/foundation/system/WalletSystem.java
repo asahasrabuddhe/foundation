@@ -1,16 +1,21 @@
 package com.technogise.foundation.system;
 
 import com.technogise.foundation.cli.WalletCLI;
-import com.technogise.foundation.service.ITransactionHistoryService;
-import com.technogise.foundation.service.IWalletService;
-import com.technogise.foundation.service.InMemoryTransactionHistoryService;
-import com.technogise.foundation.service.WalletService;
+import com.technogise.foundation.config.AppConfig;
 
 public class WalletSystem {
-    public static void main(String[] args) {
-        ITransactionHistoryService transactionHistoryService = new InMemoryTransactionHistoryService();
-        IWalletService walletService = new WalletService(transactionHistoryService);
-        WalletCLI cli = new WalletCLI(walletService, walletService, walletService, transactionHistoryService);
+    private final WalletCLI cli;
+
+    public WalletSystem(WalletCLI cli) {
+        this.cli = cli;
+    }
+
+    public void start() {
         cli.start();
+    }
+
+    public static void main(String[] args) {
+        WalletSystem system = AppConfig.buildSystem();
+        system.start();
     }
 }

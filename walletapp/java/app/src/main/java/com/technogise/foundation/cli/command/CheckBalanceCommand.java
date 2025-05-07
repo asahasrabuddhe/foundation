@@ -28,4 +28,4 @@ public class CheckBalanceCommand implements CommandStrategy {
     public String getDescription() {
         return "Check balance of a user";
     }
-} 
+}
