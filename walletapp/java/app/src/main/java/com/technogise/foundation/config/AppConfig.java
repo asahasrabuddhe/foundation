@@ -12,7 +12,7 @@ public class AppConfig {
     public static WalletSystem buildSystem() {
         UserRepository userRepository = new InMemoryUserRepository();
         TransactionStore transactionStore = new InMemoryTransactionStore();
-        WalletService walletService = new WalletServiceImpl(userRepository, transactionStore);
+        IWalletService walletService = new WalletService(userRepository, transactionStore);
         
         return new WalletSystem(
             new WalletCLI(

@@ -4,32 +4,28 @@ import com.technogise.foundation.exceptions.InsufficientBalanceException;
 import com.technogise.foundation.exceptions.InvalidCreditAmountException;
 
 public final class Account {
-    private final double balance;
+    private double balance;
 
     public Account() {
-        this(0.0);
+        balance = 0;
     }
 
-    private Account(double balance) {
-        this.balance = balance;
+    public void credit(double amount) {
+        if (amount <= 0) {
+            throw new InvalidCreditAmountException("Credit amount should be greater than zero");
+        }
+        balance += amount;
+    }
+
+    public void debit(double amount) {
+        if (amount > balance) {
+            throw new InsufficientBalanceException("Insufficient balance");
+        }
+        balance -= amount;
     }
 
     public double getBalance() {
         return balance;
-    }
-
-    public Account credit(double amount) {
-        if (amount <= 0) {
-            throw new InvalidCreditAmountException("Credit amount should be greater than zero");
-        }
-        return new Account(balance + amount);
-    }
-
-    public Account debit(double amount) {
-        if (amount > balance) {
-            throw new InsufficientBalanceException("Insufficient balance");
-        }
-        return new Account(balance - amount);
     }
 
     @Override
