@@ -22,4 +22,24 @@ public class StackTest {
         assertEquals(1, stack.size());
         assertFalse(stack.isEmpty());
     }
+
+    @Test
+    void testPeekElementFromStack() {
+        Stack stack = new Stack();
+        stack.push(1);
+        assertEquals(1, stack.peek());
+        stack.push(2);
+        stack.push(3);
+        assertEquals(3, stack.peek());
+    }
+
+//    @Test
+//    void testPopElementFromStack() {
+//        Stack stack = new Stack();
+//        stack.push(1);
+//        int element = stack.pop();
+//        assertEquals(1, element);
+//        assertEquals(0, stack.size());
+//        assertTrue(stack.isEmpty());
+//    }
 }

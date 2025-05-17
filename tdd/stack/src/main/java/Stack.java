@@ -19,4 +19,8 @@ public class Stack {
     public void push(int element) {
         elements.addFirst(element);
     }
+
+    public int peek() {
+        return elements.getFirst();
+    }
 }
