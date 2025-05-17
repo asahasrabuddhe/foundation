@@ -23,4 +23,8 @@ public class Stack {
     public int peek() {
         return elements.getFirst();
     }
+
+    public int pop() {
+        return elements.removeFirst();
+    }
 }

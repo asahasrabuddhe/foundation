@@ -33,13 +33,13 @@ public class StackTest {
         assertEquals(3, stack.peek());
     }
 
-//    @Test
-//    void testPopElementFromStack() {
-//        Stack stack = new Stack();
-//        stack.push(1);
-//        int element = stack.pop();
-//        assertEquals(1, element);
-//        assertEquals(0, stack.size());
-//        assertTrue(stack.isEmpty());
-//    }
+    @Test
+    void testPopElementFromStack() {
+        Stack stack = new Stack();
+        stack.push(1);
+        int element = stack.pop();
+        assertEquals(1, element);
+        assertEquals(0, stack.size());
+        assertTrue(stack.isEmpty());
+    }
 }
